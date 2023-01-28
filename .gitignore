@@ -1,0 +1,6 @@
+.lein-repl-history
+.nrepl-port
+/target
+/resources/public/css/
+/resources/public/js/
+config.edn
