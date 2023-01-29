@@ -8,7 +8,7 @@
 
 (defn render
   []
-  (r/render app-view))
+  (r/render [app-view]))
 
 (defn ^:export init
   []

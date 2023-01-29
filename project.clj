@@ -2,7 +2,7 @@
   :dependencies [[org.clojure/clojure "1.11.0"]
                  [io.bloomventures/commons "0.13.2"]
                  [io.bloomventures/omni "0.30.0"]
-                 [reagent "1.1.1"]
+                 [reagent "1.1.0"]
                  [cljsjs/react "17.0.2-0"]
                  [cljsjs/react-dom "17.0.2-0"]]
 
