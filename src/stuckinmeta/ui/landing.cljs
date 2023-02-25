@@ -1,5 +1,6 @@
-(ns stuckinmeta.ui.pages.landing
+(ns stuckinmeta.ui.landing
   (:require
+    [bloom.commons.pages :as pages]
     [reagent.core :as r]))
 
 (def images
@@ -14,7 +15,7 @@
    {:image/path "/images/hero5.png"
     :image/colors ["#080819" "#fb04c3" "#c6a5e9" "#2c7ed6"]}])
 
-(defn landing-page-view []
+(defn landing-page-view [_page]
   (r/with-let [image (r/atom (first images))
                timeout (r/atom nil)
                swap-image! (fn swap-image! []
@@ -28,7 +29,7 @@
        [:style "@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
                p { font-family: 'VT323', monospace; font-size: 2em; font-variant-ligatures: none;}
                p {line-height: 1.1}
-               button, h1 { font-family: 'Press Start 2P', monospace;}
+               a.button, button, h1 { font-family: 'Press Start 2P', monospace;}
                .bg { background-position: 22.5% bottom}
                @media (min-width: 1024px) {
                  .bg { background-position: left bottom}
@@ -90,11 +91,13 @@
                :style {:background color-1
                        :transition "background linear 2s"}}
            "...because the metaverse needs you."]]
-         [:button {:tw "ml-36 border border-4 p-4 whitespace-nowrap"
-                   :style {:color color-2
-                           :background color-1
-                           :border-color color-2
-                           :transition "color linear 2s, border-color linear 2s"}}
+         [:a.button
+          {:tw "inline-block ml-36 border border-4 p-4 whitespace-nowrap"
+           :href (pages/path-for [:page/home {}])
+           :style {:color color-2
+                   :background color-1
+                   :border-color color-2
+                   :transition "color linear 2s, border-color linear 2s"}}
           "> Jack In"]]]
        #_[:section.setting
           [:p "In the near future, most humans have uploaded themselves to the metaverse, living out their wildest dreams amongst their favorite franchises. But, on some servers, rogue monsters are finding their way into the wrong universes and terrorizing the wrong AI NPCs and players. Players are unhappy. Profits are down! While the Overmind is figuring out the root cause, it's up to you and your team to patch the corrupted servers."]]])))

@@ -1,7 +1,6 @@
 (ns stuckinmeta.ui.app
   (:require
-    [reagent.core :as r]
-    [stuckinmeta.ui.pages.landing :refer [landing-page-view]]))
+    [bloom.commons.pages :as pages]))
 
 (defn app-view []
-  [landing-page-view])
+  [pages/current-page-view])
