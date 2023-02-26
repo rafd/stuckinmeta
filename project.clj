@@ -4,7 +4,8 @@
                  [io.bloomventures/omni "0.30.0"]
                  [reagent "1.1.0"]
                  [cljsjs/react "17.0.2-0"]
-                 [cljsjs/react-dom "17.0.2-0"]]
+                 [cljsjs/react-dom "17.0.2-0"]
+                 [image-resizer "0.1.10"]]
 
   :main stuckinmeta.core
 
