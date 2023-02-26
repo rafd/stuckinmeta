@@ -50,6 +50,12 @@
              [hunter-view hunter-id])]]
 
          [:div {:tw "space-y-2"}
+          [:h2 {:tw "font-heading"} "/dates"]
+          (for [date (:mission/dates @mission)]
+            [:div {:tw "text-white font-text"}
+             "3" (.slice (.toISOString date) 1 10)])]
+
+         [:div {:tw "space-y-2"}
           [:h2 {:tw "font-heading"} "/verse"]
           [spoiler-view {:tw "text-white font-text"}
            (:mission/verse @mission)]]
