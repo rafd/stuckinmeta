@@ -65,10 +65,17 @@
            [:style
             (garden/css
               [:#report
+
+               [:h2
+                {:font-weight "bold"
+                 :margin-top "1em"}]
+
                [:ul
                 {:list-style "disc"
-                 :margin-left "1em"}
-                [:li]]])]
+                 :margin-left "2em"}]
+
+               [:img
+                {:margin "1em"}]])]
            [:div#report
             [:h2 {:tw "font-heading"} "/report"]
 
