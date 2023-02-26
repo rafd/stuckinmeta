@@ -33,14 +33,13 @@
     [page/page-view {}
      (when @mission
        [:div.mission {:tw "space-y-4"}
-        [:div {:tw "flex flex-wrap gap-4 items-end"}
-         [:img {:src (images/mission-path (:mission/id @mission) "cover" 400)
-                :tw "w-50 aspect-square"}]
+        [:img {:src (images/mission-path (:mission/id @mission) "cover" 400)
+                :tw "w-100 max-w-full aspect-square"}]
 
-         [:div {:tw "space-y-1"}
-          [:h2 {:tw "font-heading"} "/mission"]
-          [:h1 {:tw "text-theme-2 font-heading leading-normal"
-                :style {:font-size "2em"}} (:mission/codename @mission)]]]
+        [:div {:tw "space-y-1"}
+         [:h2 {:tw "font-heading"} "/mission"]
+         [:h1 {:tw "text-theme-2 font-heading leading-normal"
+               :style {:font-size "2em"}} (:mission/codename @mission)]]
 
         [:div {:tw "flex gap-8 flex-wrap"}
          [:div {:tw "space-y-2"}
@@ -80,6 +79,6 @@
             [:h2 {:tw "font-heading"} "/report"]
 
             [:div.content
-             {:tw "text-sm bg-black text-white p-4 font-long-text"
+             {:tw "text-sm text-white font-long-text"
               :dangerouslySetInnerHTML {:__html (:report/text @report)}}]]])])]))
 
