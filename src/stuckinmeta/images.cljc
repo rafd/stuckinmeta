@@ -16,9 +16,12 @@
      (def image-file-path "./db/")
 
      (defn resize [f size]
-       (resizer.format/as-stream (resizer/force-resize f size size) "jpg"))
+       (resizer.format/as-stream (resizer/resize f size size) "jpg"))
 
      #_(resize (io/file "db/missions/sand-and-stone/cover.png") 100)
+     #_(with-open [out (io/output-stream (io/file "test.jpeg"))]
+         (io/copy (resize (io/file "db/missions/sand-and-stone/image-map.png") 100)
+                  out))
 
      (defn image-response
        [path size]
@@ -40,10 +43,8 @@
            (image-response (get-in request [:params :*])
                            (Integer. ^java.lang.String (get-in request [:query-params "size"]))))]])))
 
-#?(:cljs
-   (do
-     (defn hunter-path [id size]
-       (str "/imgs/hunters/" (name id) ".jpeg?size=" size))
+(defn hunter-path [id size]
+  (str "/imgs/hunters/" (name id) ".jpeg?size=" size))
 
-     (defn mission-path [id size]
-       (str "/imgs/missions/" (name id) "/cover.jpeg?size=" size))))
+(defn mission-path [mission-id image-name size]
+  (str "/imgs/missions/" (name mission-id) "/" image-name ".jpeg?size=" size))

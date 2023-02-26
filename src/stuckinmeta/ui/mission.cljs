@@ -1,6 +1,7 @@
 (ns stuckinmeta.ui.mission
   (:require
     [reagent.core :as r]
+    [garden.core :as garden]
     [bloom.commons.pages :as pages]
     [stuckinmeta.images :as images]
     [stuckinmeta.ui.page :as page]
@@ -33,7 +34,7 @@
      (when @mission
        [:div.mission {:tw "space-y-4"}
         [:div {:tw "flex flex-wrap gap-4 items-end"}
-         [:img {:src (images/mission-path (:mission/id @mission) 400)
+         [:img {:src (images/mission-path (:mission/id @mission) "cover" 400)
                 :tw "w-50 aspect-square"}]
 
          [:div {:tw "space-y-1"}
@@ -60,8 +61,18 @@
            (:mission/monster @mission)]]]
 
         (when @report
-          [:div.report
-           [:h2 {:tw "font-heading"} "/report"]
-           [:div.content {:tw "whitespace-pre-wrap text-sm bg-black text-white p-4 font-long-text"}
-            (:report/text @report)]])])]))
+          [:<>
+           [:style
+            (garden/css
+              [:#report
+               [:ul
+                {:list-style "disc"
+                 :margin-left "1em"}
+                [:li]]])]
+           [:div#report
+            [:h2 {:tw "font-heading"} "/report"]
+
+            [:div.content
+             {:tw "text-sm bg-black text-white p-4 font-long-text"
+              :dangerouslySetInnerHTML {:__html (:report/text @report)}}]]])])]))
 

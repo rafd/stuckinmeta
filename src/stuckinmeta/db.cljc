@@ -2,8 +2,12 @@
   (:require
     #?@(:clj
          [[clojure.set :as set]
+          [clojure.string :as string]
           [clojure.java.io :as io]
-          [bloom.commons.file-db :as fdb]]
+          [bloom.commons.file-db :as fdb]
+          [markdown.core :as markdown]
+          [markdown.transformers]
+          [stuckinmeta.images :as images]]
          :cljs
          [[bloom.commons.ajax :as ajax]
           [reagent.core :as r]])))
@@ -44,9 +48,19 @@
 
          :report
          (let [id params]
-           (some->> (io/file (:data-path db-config) "missions" (name id) "report.md")
-                    slurp
-                    (assoc {} :report/text)))))
+           (some-> (io/file (:data-path db-config) "missions" (name id) "report.md")
+                   slurp
+                   (markdown/md-to-html-string
+                     :replacement-transformers
+                     (into [(fn prepend-image-paths
+                              [text state]
+                              [(string/replace text #"(!\[.*?\]\()(.+?)(\))"
+                                               (fn [[_ pre url post]]
+                                                 (str pre
+                                                      (images/mission-path id url 400)
+                                                      post))) state])]
+                           markdown.transformers/transformer-vector))
+                   (->> (assoc {} :report/text))))))
 
      #_(fetch [:one [:hunter/id :hunter.id/zerxez]])
      #_(fetch [:many :hunter/id])

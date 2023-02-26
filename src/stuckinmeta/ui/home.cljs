@@ -18,7 +18,7 @@
           ^{:key id}
           [:a.mission {:tw "text-theme-2 flex flex-col items-center font-text space-y-2"
                        :href (pages/path-for [:page/mission {:id (name id)}])}
-           [:img {:src (images/mission-path id 240)
+           [:img {:src (images/mission-path id "cover" 240)
                   :tw "w-30 h-30"}]
            codename])]]
        [:div
