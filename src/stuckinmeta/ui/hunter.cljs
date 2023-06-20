@@ -22,7 +22,8 @@
         (when @missions
           [:div {:tw "space-y-2"}
            [:h2 {:tw "font-heading"} "/missions"]
-           (for [mission @missions]
+           (for [mission (->> @missions
+                              (sort-by (fn [m] (first (:mission/dates m)))))]
              ^{:key (:mission/id mission)}
              [:a {:tw "block text-theme-2 font-text"
                   :href (pages/path-for [:page/mission {:id (name (:mission/id mission))}])}

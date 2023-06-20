@@ -14,7 +14,8 @@
       [:div
        [:h2 {:tw "font-heading"} "/missions"]
        [:div {:tw "flex gap-4 p-4"}
-        (for [{:mission/keys [id codename]} @missions]
+        (for [{:mission/keys [id codename]} (->> @missions
+                                                 (sort-by (fn [m] (first (m :mission/dates)))))]
           ^{:key id}
           [:a.mission {:tw "text-theme-2 flex flex-col items-center font-text space-y-2"
                        :href (pages/path-for [:page/mission {:id (name id)}])}
